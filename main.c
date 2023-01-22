@@ -74,11 +74,23 @@ void	print_arg(t_arg *data)
 	while (data->map[++i])
 	{
 		j = -1;
-		printf("\n");
 		while(data->map[i][++j])
 			printf("%c", data->map[i][j]);
+		printf("\n");
 	}
-
+	printf("\n");
+	i = 0;
+	while (i < data->size_map)
+	{
+		j = 0;
+		while(j < data->longest_line)
+		{
+			printf("%i", data->tab[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
 }
 
 int main(int ac, char **av)

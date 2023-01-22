@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 16:38:19 by fjallet           #+#    #+#             */
-/*   Updated: 2023/01/22 18:18:05 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/01/22 19:16:01 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ int	map_parsing(t_arg *data)
 	while (i < data->size_map)
 	{
 		j = 0;
-		i++;
 		while (j < data->longest_line)
 		{
 			if (j < ft_strlen2(data->map[i]) && test_map(i, j, data))
@@ -91,12 +90,14 @@ int	map_parsing(t_arg *data)
 				free_coord(data->tab, data->size_map);
 				return (1);
 			}
-			else if (j > ft_strlen2(data->map[i]) || data->map[i][j] == ' ' || data->map[i][j] == 1)
+			if (j >= ft_strlen2(data->map[i]) || data->map[i][j] == ' ' ||\
+			 data->map[i][j] == '1')
 				data->tab[i][j] = 1;
 			else
 				data->tab[i][j] = 0;
 			j++;
 		}
+		i++;
 	}
 	return (0);
 }
