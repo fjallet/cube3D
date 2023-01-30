@@ -1,9 +1,9 @@
 #include "fdf.h"
 
-void	ft_draw3D(t_fdf *f, long long **texture, long long **buffer)
+void	ft_draw3D(t_fdf *f, long long **texture)
 {
 	// long long **texture = get_texture(f);
-	ft_draw_ceillings_floors(f, buffer, texture);
+	ft_draw_ceillings_floors(f);
 	for (int x = 0; x < screenWidth; x++)
 		{
 			ft_forward_back(f);
@@ -22,7 +22,7 @@ void	ft_draw3D(t_fdf *f, long long **texture, long long **buffer)
 			wall_size(f);
 			//texturing calculations
       		choose_text(f);
-			ft_draw_walls(f, buffer, x, texture);
+			ft_draw_walls(f, x, texture);
 		}
 		//draw_raycasting(f, buffer);
 }
@@ -42,8 +42,7 @@ void	ft_draw3D(t_fdf *f, long long **texture, long long **buffer)
 int	expose_hook(t_fdf *f)
 {
 	// int test = 9696163;
-	long long **buffer = NULL;
-	ft_draw3D(f, f->texture, buffer);
+	ft_draw3D(f, f->texture);
 	// draw_pixel4(f, 5, 6, test);
 	// draw_pixel4(f, 5, 7, test);
 	// draw_pixel4(f, 5, 8, test);
@@ -53,7 +52,6 @@ int	expose_hook(t_fdf *f)
 	// draw_pixel4(f, 5, 12, test);
 	// draw_pixel4(f, 5, 13, test);
 	mlx_put_image_to_window(f->mlx_ptr, f->win_ptr, f->text[0].image, 0, 0);
-	(void)buffer;
 	return (0);
 }
 
@@ -107,10 +105,13 @@ int main(int ac, char **av)
 	if (cube3D_init(&fdf, av[1]))
 		return (1);
 	print_arg(&fdf.data);
-	//mlx_hook(fdf.win_ptr, 2, 1L << 0, key_press, &fdf);
-	//mlx_loop_hook(fdf.mlx_ptr, expose_hook, &fdf);
-	//mlx_hook(fdf.win_ptr, 3, 1L << 1, key_release, &fdf);
-	//mlx_loop(fdf.mlx_ptr);
+	printf("colors :\nf = %i et c = %i\n", fdf.floor, fdf.ceiling);
+	if (img_init(&fdf))
+		return (1);
+	mlx_hook(fdf.win_ptr, 2, 1L << 0, key_press, &fdf);
+	mlx_loop_hook(fdf.mlx_ptr, expose_hook, &fdf);
+	mlx_hook(fdf.win_ptr, 3, 1L << 1, key_release, &fdf);
+	mlx_loop(fdf.mlx_ptr);
 	(void)fdf;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 11:45:36 by abouleau          #+#    #+#             */
-/*   Updated: 2023/01/22 17:47:16 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/01/30 17:43:12 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@
 #define screenWidth 640 //640//1920
 #define screenHeight 480 //480//1080
 
-#define mapWidth 24
-#define mapHeight 24
+// #define mapWidth 24
+// #define mapHeight 24
 #define texWidth 1024
 #define texHeight 1024
 
-extern int worldMap[mapWidth][mapHeight];
+//extern int worldMap[mapWidth][mapHeight];
 
 typedef struct s_data
 {
@@ -120,14 +120,18 @@ typedef struct s_fdf
 	int			texX;
 	int			texNum;
 	int			texY;
+	int			mapWidth;
+	int			mapHeight;
 	long long	**texture;
 	t_text		text[5];
 	t_arg		data;
+	int			floor;
+	int			ceiling;
 }				t_fdf;
 
 
 //main.c
-void		ft_draw3D(t_fdf *f, long long **texture, long long **buffer);
+void		ft_draw3D(t_fdf *f, long long **texture);
 int			expose_hook(t_fdf *f);
 
 //ray.c
@@ -138,7 +142,7 @@ void		check_wall_hit(t_fdf *f);
 void		ray_size(t_fdf *f);
 void		wall_size(t_fdf *f);
 void		choose_text(t_fdf *f);
-void		ft_draw_walls(t_fdf *f, long long **buffer, int x, long long **texture);
+void		ft_draw_walls(t_fdf *f, int x, long long **texture);
 
 // move_player.c
 void		ft_rotate_left(t_fdf *f, double olddirX);
@@ -149,19 +153,19 @@ void		ft_forward_back(t_fdf *f);
 //	ft_draw.c
 void		draw_pixel(t_fdf *fdf, int x1, int y1, int color);
 int			get_color( int x, int y, t_text text);
-void		ft_draw_ceillings_floors(t_fdf *f, long long **buffer, long long **texture);
+void		ft_draw_ceillings_floors(t_fdf *f);
 
 // control.c
-int		ft_close(t_fdf *f);
-int		key_press(int keycode, t_fdf *f);
-int		key_release(int keycode, t_fdf *f);
-void	init_controls(t_fdf *fdf);
+int			ft_close(t_fdf *f);
+int			key_press(int keycode, t_fdf *f);
+int			key_release(int keycode, t_fdf *f);
+void		init_controls(t_fdf *fdf);
 
 // init.c
 char		*ft_strdup2(const char *s);
 void		start_pos_init(t_fdf *f, char c);
 int			cube3D_init(t_fdf *f, char *av);
-long long	**get_texture(t_fdf f);
+int			get_texture(t_fdf *f);
 int			img_init(t_fdf *f);
 
 // gnl.c
@@ -178,9 +182,14 @@ void		check_line(char *str, t_arg *data);
 int			get_data(t_arg *data, char *av);
 
 // parsing.c
-int		create_int_tab(t_arg *data);
-int		test_map(int i, int j, t_arg *data);
-int		map_parsing(t_arg *data);
+int			create_int_tab(t_arg *data);
+int			test_map(int i, int j, t_arg *data);
+int			map_parsing(t_arg *data);
+
+// cub3D_utils
+int			create_trgb(int r, int g, int b);
+int			check_rgb(char *rgb);
+int			get_rgb(char *rgb, int c);
 
 // clean.c
 int			check_file(char *str);

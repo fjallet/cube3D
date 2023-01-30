@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouleau <abouleau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 17:53:20 by abouleau          #+#    #+#             */
-/*   Updated: 2022/10/30 17:53:20 by abouleau         ###   ########.fr       */
+/*   Updated: 2023/01/30 17:45:49 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@ void	ft_forward_back(t_fdf *f)
 {
 	if (f->forward == 1)
 	{
-		if (worldMap[(int)(f->posX + (f->dirX * f->
+		if (f->data.tab[(int)(f->posX + (f->dirX * f->
 						movespeed * 2))][(int)f->posY] == 0)
 			f->posX += f->dirX * f->movespeed;
-		if (worldMap[(int)(f->posX)][(int)(f->posY +
+		if (f->data.tab[(int)(f->posX)][(int)(f->posY +
 					(f->dirY * f->movespeed * 2))] == 0)
 			f->posY += f->dirY * f->movespeed;
 	}
 	if (f->back == 1)
 	{
-		if (worldMap[(int)(f->posX - (f->dirX * f->
+		if (f->data.tab[(int)(f->posX - (f->dirX * f->
 						movespeed * 2))][(int)(f->posY)] == 0)
 			f->posX -= f->dirX * f->movespeed;
-		if (worldMap[(int)(f->posX)][(int)(f->posY -
+		if (f->data.tab[(int)(f->posX)][(int)(f->posY -
 					(f->dirY * f->movespeed * 2))] == 0)
 			f->posY -= f->dirY * f->movespeed;
 	}
@@ -38,20 +38,20 @@ void	ft_left_right(t_fdf *f)
 {
 	if (f->right == 1)
 	{
-		if (worldMap[(int)(f->posX + f->dirY *
+		if (f->data.tab[(int)(f->posX + f->dirY *
 					(f->movespeed * 2))][(int)f->posY] == 0)
 			f->posX += f->dirY * f->movespeed;
-		if (worldMap[(int)f->posX][(int)(f->posY -
+		if (f->data.tab[(int)f->posX][(int)(f->posY -
 					f->dirX *
 					(f->movespeed * 2))] == 0)
 			f->posY -= f->dirX * f->movespeed;
 	}
 	if (f->left == 1)
 	{
-		if (worldMap[(int)(f->posX - f->dirY *
+		if (f->data.tab[(int)(f->posX - f->dirY *
 					(f->movespeed * 2))][(int)f->posY] == 0)
 			f->posX -= f->dirY * f->movespeed;
-		if (worldMap[(int)f->posX][(int)(f->posY +
+		if (f->data.tab[(int)f->posX][(int)(f->posY +
 					f->dirX *
 					(f->movespeed * 2))] == 0)
 			f->posY += f->dirX * f->movespeed;

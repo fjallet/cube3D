@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 11:21:23 by fjallet           #+#    #+#             */
-/*   Updated: 2023/01/22 17:59:36 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/01/30 18:50:44 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*check_str(char *str, t_arg *data)
 			|| !ft_strncmp(str + i, "W", 1) || !ft_strncmp(str + i, "E", 1))
 		{
 			data->count_start++;
-			data->dir_player = str[i + 1];
+			data->dir_player = str[i];
 			data->x = i;
 			str[i] = '0';
 		}

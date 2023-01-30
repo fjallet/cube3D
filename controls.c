@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 17:54:01 by abouleau          #+#    #+#             */
-/*   Updated: 2023/01/22 11:42:23 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/01/30 19:23:59 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,22 @@ int	ft_close(t_fdf *f)
 	free(f->data.f);
 	free(f->data.c);
 	free_tab(f->data.map);
+	free_coord(f->data.tab, f->data.size_map);
+	free(f->texture[0]);
+	free(f->texture[1]);
+	free(f->texture[2]);
+	free(f->texture[3]);
+	free(f->texture);
 	if (f->mlx_ptr && f->text[0].image)
 		mlx_destroy_image(f->mlx_ptr, f->text[0].image);
+	if (f->mlx_ptr && f->text[1].image)
+		mlx_destroy_image(f->mlx_ptr, f->text[1].image);
+	if (f->mlx_ptr && f->text[2].image)
+		mlx_destroy_image(f->mlx_ptr, f->text[2].image);
+	if (f->mlx_ptr && f->text[3].image)
+		mlx_destroy_image(f->mlx_ptr, f->text[3].image);
+	if (f->mlx_ptr && f->text[4].image)
+		mlx_destroy_image(f->mlx_ptr, f->text[4].image);
 	if (f->mlx_ptr && f->win_ptr)
 		mlx_destroy_window(f->mlx_ptr, f->win_ptr);
 	if (f->mlx_ptr)
@@ -33,10 +47,10 @@ int	ft_close(t_fdf *f)
 
 int	key_press(int keycode, t_fdf *f)
 {
-	// printf("key_press == %d\n", keycode);
+	//printf("key_press == %d\n", keycode);
 	if (keycode == 65307)
 		ft_close(f);
-	else if (keycode == 122) // W ou Z
+	else if (keycode == 119) // W ou Z
 	{
 		// printf("f->forward == %d\n", f->forward);
 		f->forward = 1;
@@ -44,7 +58,7 @@ int	key_press(int keycode, t_fdf *f)
 	}
 	else if (keycode == 115) // S ou S
 		f->back = 1;
-	else if (keycode == 113) // A ou Q
+	else if (keycode == 97) // A ou Q
 		f->left = 1;
 	else if (keycode == 100) // D ou D
 		f->right = 1;
@@ -63,11 +77,11 @@ int	key_release(int keycode, t_fdf *f)
 	// printf("key_release == %d\n", keycode);
 	if (keycode == 65307)
 		ft_close(f);
-	else if (keycode == 122) // W ou Z
+	else if (keycode == 119) // W ou Z
 		f->forward = 0;
 	else if (keycode == 115) // S ou S
 		f->back = 0;
-	else if (keycode == 113) // A ou Q
+	else if (keycode == 97) // A ou Q
 		f->left = 0;
 	else if (keycode == 100) // D ou D
 		f->right = 0;

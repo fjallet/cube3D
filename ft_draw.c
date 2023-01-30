@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 18:36:28 by abouleau          #+#    #+#             */
-/*   Updated: 2023/01/22 16:55:03 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/01/30 18:01:01 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,23 @@ int	get_color(int x, int y, t_text text)
 	return (color);
 }
 
-void    ft_draw_ceillings_floors(t_fdf *f, long long **buffer, long long **texture)
+void    ft_draw_ceillings_floors(t_fdf *f)
+{
+	int	x;
+	int	y;
+
+	y = -1;
+	while (++y < screenHeight)
+	{
+		x = -1;
+		while(++x < screenWidth && y > (screenHeight / 2))
+			draw_pixel(f, x, y, f->floor);
+		while(++x < screenWidth && y < (screenHeight / 2))
+			draw_pixel(f, x, y, f->ceiling);
+	}
+}
+
+/*void    ft_draw_ceillings_floors(t_fdf *f, long long **buffer, long long **texture)
 {
 		for(int y = 0; y < screenHeight; y++)
 		{
@@ -73,7 +89,7 @@ void    ft_draw_ceillings_floors(t_fdf *f, long long **buffer, long long **textu
 			}
 		}
 		(void)buffer;
-}
+}*/
 
 /*void    draw_raycasting(t_fdf *f, long long **buffer)
 {

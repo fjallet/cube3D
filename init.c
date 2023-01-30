@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 17:49:51 by abouleau          #+#    #+#             */
-/*   Updated: 2023/01/22 19:08:02 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/01/30 18:57:48 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,26 +32,41 @@ char	*ft_strdup2(const char *s)
 	return (tab);
 }
 
-/*long long	**get_texture(t_fdf *f)
+int	get_texture(t_fdf *f)
 {
-	long long **texture;
-	texture = malloc (sizeof(long long) * 8);
-	for(int i = 0; i < 8; i++)
-		texture[i] = malloc (sizeof(long long) * (texWidth * texHeight));
-	for(int x = 0; x < texWidth; x++)
+	int	i;
+	int	x;
+	int	y;
+
+	i = 0;
+	x = -1;
+	f->texture = malloc (sizeof(long long) * 4);
+	if (!(f->texture))
+		return (1);
+	while (i < 4)
+		f->texture[i++] = malloc (sizeof(long long) * (texWidth * texHeight));
+	if (!f->texture)
 	{
-		for(int y = 0; y < texHeight; y++)
+		while (i >= 0)
+			free(f->texture[i--]);
+		free(f->texture);
+		return (1);
+	}
+	while(++x < texWidth)
+	{
+		y = -1;
+		while(++y < texHeight)
 		{
-			texture[0][texWidth * y + x] = get_color(x, y, f.text[1]);
-			texture[1][texWidth * y + x] = get_color(x, y, f.text[2]);
-			texture[2][texWidth * y + x] = get_color(x, y, f.text[3]);
-			texture[3][texWidth * y + x] = get_color(x, y, f.text[4]);
-			texture[4][texWidth * y + x] = 957410;//floor
-			texture[7][texWidth * y + x] = 10186690; //ceilling
+			f->texture[0][texWidth * y + x] = get_color(x, y, f->text[1]);
+			f->texture[1][texWidth * y + x] = get_color(x, y, f->text[2]);
+			f->texture[2][texWidth * y + x] = get_color(x, y, f->text[3]);
+			f->texture[3][texWidth * y + x] = get_color(x, y, f->text[4]);
+			//texture[4][texWidth * y + x] = 957410;//floor
+			//texture[7][texWidth * y + x] = 10186690; //ceilling
 		}
 	}
-	return (texture);
-}*/
+	return (0);
+}
 
 /*int	get_floor(char *f)
 {
@@ -64,7 +79,8 @@ char	*ft_strdup2(const char *s)
 			rgb[i] = f[i];
 		i++;
 	}
-	//ft_print_unsignbr_base(ft_atoi(f));
+	ft_print_unsignbr_base(ft_atoi(f));
+	return (0);
 }*/
 
 void	start_pos_init(t_fdf *f, char c)
@@ -105,12 +121,17 @@ int	cube3D_init(t_fdf *f, char *av)
 		return (1);
 	if (map_parsing(&f->data))
 		return (1);
-	f->movespeed = 0.0001;
-	f->rotspeed = 0.0001; //0.033 * 1.8;
-	f->posX = f->data.x;
-	f->posY = f->data.y;
+	f->movespeed = 0.00003;
+	f->rotspeed = 0.00003; //0.033 * 1.8;
+	f->posX = f->data.y + 1;
+	f->posY = f->data.x + 1;
+	f->mapWidth = f->data.longest_line;
+	f->mapHeight = f->data.size_map;
 	start_pos_init(f, f->data.dir_player);
-	//fdf.floor = get_floor(fdf.data.f);
+	if (check_rgb(f->data.f) || check_rgb(f->data.c))
+		return (1);
+	f->floor = create_trgb(get_rgb(f->data.f, 0), get_rgb(f->data.f, 1), get_rgb(f->data.f, 2));
+	f->ceiling = create_trgb(get_rgb(f->data.c, 0), get_rgb(f->data.c, 1), get_rgb(f->data.c, 2));
 	return (0);
 }
 
@@ -130,6 +151,7 @@ int	img_init(t_fdf *fdf)
 	fdf->text[3].data = mlx_get_data_addr(fdf->text[3].image, &fdf->text[3].bpp, &fdf->text[3].size_l, &fdf->text[3].endian);
 	fdf->text[4].image = mlx_xpm_file_to_image(fdf->mlx_ptr, "./text4.xpm", &largeur, &hauteur);
 	fdf->text[4].data = mlx_get_data_addr(fdf->text[4].image, &fdf->text[4].bpp, &fdf->text[4].size_l, &fdf->text[4].endian);
+	get_texture(fdf);
 	(void)fdf;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 19:43:55 by abouleau          #+#    #+#             */
-/*   Updated: 2023/01/21 11:27:43 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/01/30 18:45:12 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void    check_wall_hit(t_fdf *f) // check si un mur est touché, et calcule la d
             f->mapY += f->stepY;
             f->side = 1;
         }
-        if (worldMap[f->mapX][f->mapY] > 0) // Check if ray has hit a wall
+        if (f->data.tab[f->mapX][f->mapY] > 0) // Check if ray has hit a wall
             f->hit = 1;
     }
     // side indique si le mur est un x ou y;
@@ -121,7 +121,7 @@ void    choose_text(t_fdf *f)
 		f->texX = texWidth - f->texX - 1;
 }
 
-void    ft_draw_walls(t_fdf *f, long long **buffer, int x, long long **texture)
+void    ft_draw_walls(t_fdf *f, int x, long long **texture)
 {
     // How much to increase the texture coordinate per screen pixel
 	double step = 1.0 * texHeight / f->lineHeight;
@@ -140,6 +140,5 @@ void    ft_draw_walls(t_fdf *f, long long **buffer, int x, long long **texture)
 			f->color = (f->color >> 1) & 8355711; // permet de choisir quelle texture utiliser ?*/
 		draw_pixel(f, x, y, f->color);
 		//buffer[y][x] = f->color;
-		(void)buffer;
 	}
 }
