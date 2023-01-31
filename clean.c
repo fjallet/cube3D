@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:57:43 by abouleau          #+#    #+#             */
-/*   Updated: 2023/01/22 16:50:10 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/01/31 15:34:09 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,30 +50,13 @@ void	free_coord(int **map, int count_y)
 	free(map);
 }
 
-int	check_argv(char *argv)
+void	free_data(t_arg *data)
 {
-	int	fd;
-
-	fd = open(argv, O_RDONLY);
-	if (fd == -1)
-		return (1);
-	else
-		close(fd);
-	return (0);
-}
-
-int	check_file(char *str)
-{
-	int	i;
-	
-	if (!str)
-		return (1);
-	i = 0;
-	while (str[i])
-		i++;
-	if (ft_strncmp(str + i - 4, ".cub", 4) != 0)
-		return (1);
-	if (check_argv(str))
-		return (1);
-	return (0);
+	free(data->so);
+	free(data->we);
+	free(data->ea);
+	free(data->no);
+	free(data->f);
+	free(data->c);
+	//free_tab(data->map);
 }

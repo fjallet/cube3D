@@ -6,57 +6,46 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 17:04:41 by fjallet           #+#    #+#             */
-/*   Updated: 2023/01/30 17:06:32 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/01/31 15:45:24 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	check_rgb(char *rgb)
+int	ft_strlen2(char *str)
 {
 	int	i;
-	int	count;
+
+	if (!str)
+		return (0);
+	i = 0;
+	while(str[i])
+		i++;
+	return (i);
+}
+
+int	create_int_tab(t_arg *data)
+{
+	int	i;
 
 	i = 0;
-	count = 0;
-	while (i == 0 || rgb[i] == ',')
-	{
-		if (rgb[i] == ',')
-			i++;
-		if (ft_atoi(rgb) > 255 && ft_atoi(rgb) > -1)
-			return (1);
-		while (rgb[i] > 47 && rgb[i] < 58)
-			i++;
-		count++;
-	}
-	if (count != 3)
+	data->tab = (int **) malloc (sizeof(int *) * (data->size_map + 1));
+	if (!(data->tab))
 		return (1);
-	return (0);
-}
-
-int	create_trgb(int r, int g , int b)
-{
-	return (0 << 24 | r << 16 | g << 8 | b);
-}
-
-int	get_rgb(char *rgb, int c)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (i == 0 || rgb[i] == ',')
+	while (i < data->size_map)
 	{
-		if (rgb[i] == ',')
-			i++;
-		if (count == c)
-			return (ft_atoi(&rgb[i]));
-		while (rgb[i] > 47 && rgb[i] < 58)
-			i++;
-		count++;
+		data->tab[i] = (int *) malloc (sizeof(int) * (data->longest_line));
+		if (!(data->tab[i]))
+		{
+			while (i-- > 0)
+				free(data->tab[i]);
+			free(data->tab);
+			return (1);
+		}
+		i++;
 	}
-	return (0);
+	data->tab[i] = NULL;
+	return(0);
 }
 
 /*char	*ft_put_rgb_to_hex(char *rgb, char *hex)

@@ -1,5 +1,5 @@
 SRC = main.c get_next_line.c get_next_line_utils.c init.c move_player.c controls.c ft_draw.c ray.c \
-clean.c parsing.c data.c cub3D_utils.c
+clean.c parsing.c data.c cub3D_utils.c check.c ray2.c
 
 NAME = raycasting
 

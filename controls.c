@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 17:54:01 by abouleau          #+#    #+#             */
-/*   Updated: 2023/01/30 19:23:59 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/01/31 15:33:13 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,7 @@
 
 int	ft_close(t_fdf *f)
 {
-	free(f->data.so);
-	free(f->data.we);
-	free(f->data.ea);
-	free(f->data.no);
-	free(f->data.f);
-	free(f->data.c);
-	free_tab(f->data.map);
+	free_data(&f->data);
 	free_coord(f->data.tab, f->data.size_map);
 	free(f->texture[0]);
 	free(f->texture[1]);

@@ -1,30 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/31 15:49:51 by fjallet           #+#    #+#             */
+/*   Updated: 2023/01/31 16:10:41 by fjallet          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-void	ft_draw3D(t_fdf *f, long long **texture)
+void	ft_draw3d(t_fdf *f, long long **texture)
 {
-	// long long **texture = get_texture(f);
+	int	x;
+
+	x = -1;
 	ft_draw_ceillings_floors(f);
-	for (int x = 0; x < screenWidth; x++)
-		{
-			ft_forward_back(f);
-			ft_left_right(f);
-			ft_rotate_right_left(f);
-			ray_screen(f, x);
-			f->mapX = (int)f->posX; // current square the ray is in;
-     		f->mapY = (int)f->posY; // current square the ray is in;
-			ray_delta_step(f);
-			//was there a wall hit?
-      		//f->side; was a NS or a EW wall hit?
-			first_step_direction(f);
-			f->hit = 0;
-			check_wall_hit(f);
-			ray_size(f);
-			wall_size(f);
-			//texturing calculations
-      		choose_text(f);
-			ft_draw_walls(f, x, texture);
-		}
-		//draw_raycasting(f, buffer);
+	while (++x < screenWidth)
+	{
+		ft_forward_back(f);
+		ft_left_right(f);
+		ft_rotate_right_left(f);
+		ray_screen(f, x);
+		f->mapX = (int)f->posX;
+		f->mapY = (int)f->posY;
+		ray_delta_step(f);
+		first_step_direction(f);
+		f->hit = 0;
+		check_wall_hit(f);
+		ray_size(f);
+		wall_size(f);
+		choose_text(f);
+		ft_draw_walls(f, x, texture);
+	}
 }
 
 /*void	draw_pixel4(t_fdf *fdf, int x1, int y1, int color)
@@ -41,21 +51,12 @@ void	ft_draw3D(t_fdf *f, long long **texture)
 
 int	expose_hook(t_fdf *f)
 {
-	// int test = 9696163;
-	ft_draw3D(f, f->texture);
-	// draw_pixel4(f, 5, 6, test);
-	// draw_pixel4(f, 5, 7, test);
-	// draw_pixel4(f, 5, 8, test);
-	// draw_pixel4(f, 5, 9, test);
-	// draw_pixel4(f, 5, 10, test);
-	// draw_pixel4(f, 5, 11, test);
-	// draw_pixel4(f, 5, 12, test);
-	// draw_pixel4(f, 5, 13, test);
+	ft_draw3d(f, f->texture);
 	mlx_put_image_to_window(f->mlx_ptr, f->win_ptr, f->text[0].image, 0, 0);
 	return (0);
 }
 
-void	print_arg(t_arg *data)
+/*void	print_arg(t_arg *data)
 {
 	printf("no == %s\n", data->no);
 	printf("so == %s\n", data->so);
@@ -89,23 +90,24 @@ void	print_arg(t_arg *data)
 		printf("\n");
 		i++;
 	}
-}
+}*/
 
-int main(int ac, char **av)
+//print_arg(&fdf.data);
+//printf("colors :\nf = %i et c = %i\n", fdf.floor, fdf.ceiling);
+
+int	main(int ac, char **av)
 {
 	t_fdf	fdf;
 
-	if (ac != 2 || check_file(av[1]))
+	if (ac != 2 || check_file(av[1], ".cub"))
 	{
 		printf("wrong filename\n");
 		return (0);
 	}
 	ft_bzero(&fdf, sizeof(fdf));
 	ft_bzero(&fdf.data, sizeof(t_arg));
-	if (cube3D_init(&fdf, av[1]))
+	if (cube3d_init(&fdf, av[1]))
 		return (1);
-	print_arg(&fdf.data);
-	printf("colors :\nf = %i et c = %i\n", fdf.floor, fdf.ceiling);
 	if (img_init(&fdf))
 		return (1);
 	mlx_hook(fdf.win_ptr, 2, 1L << 0, key_press, &fdf);

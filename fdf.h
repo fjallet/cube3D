@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 11:45:36 by abouleau          #+#    #+#             */
-/*   Updated: 2023/01/30 17:43:12 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/01/31 16:28:02 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ typedef struct s_fdf
 
 
 //main.c
-void		ft_draw3D(t_fdf *f, long long **texture);
+void		ft_draw3d(t_fdf *f, long long **texture);
 int			expose_hook(t_fdf *f);
 
 //ray.c
@@ -140,6 +140,8 @@ void		ray_delta_step(t_fdf *f);
 void		first_step_direction(t_fdf *f);
 void		check_wall_hit(t_fdf *f);
 void		ray_size(t_fdf *f);
+
+//ray2.c
 void		wall_size(t_fdf *f);
 void		choose_text(t_fdf *f);
 void		ft_draw_walls(t_fdf *f, int x, long long **texture);
@@ -164,7 +166,7 @@ void		init_controls(t_fdf *fdf);
 // init.c
 char		*ft_strdup2(const char *s);
 void		start_pos_init(t_fdf *f, char c);
-int			cube3D_init(t_fdf *f, char *av);
+int			cube3d_init(t_fdf *f, char *av);
 int			get_texture(t_fdf *f);
 int			img_init(t_fdf *f);
 
@@ -178,22 +180,30 @@ char		*get_next_line(int fd);
 char		*check_str(char *str, t_arg *data);
 char		**get_map(char *str, char **old_map, t_arg *data);
 int			ft_empty_sentence(char *str);
-void		check_line(char *str, t_arg *data);
 int			get_data(t_arg *data, char *av);
+int			get_xpm_img(t_fdf *fdf);
 
 // parsing.c
-int			create_int_tab(t_arg *data);
 int			test_map(int i, int j, t_arg *data);
+int			map_parsing2(t_arg *data, int i, int j);
 int			map_parsing(t_arg *data);
-
-// cub3D_utils
 int			create_trgb(int r, int g, int b);
-int			check_rgb(char *rgb);
 int			get_rgb(char *rgb, int c);
 
-// clean.c
-int			check_file(char *str);
+//check.c
+int			check_data(t_arg *data);
 int			check_argv(char *argv);
+int			check_file(char *str, char *suffix);
+int			check_rgb(char *rgb);
+void		check_line(char *str, t_arg *data);
+
+// cub3D_utils
+int			ft_strlen2(char *str);
+int			create_int_tab(t_arg *data);
+
+
+// clean.c
+void		free_data(t_arg *data);
 void		free_coord(int **map, int count_y);
 void		free_tab(char **split);
 
