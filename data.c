@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 11:21:23 by fjallet           #+#    #+#             */
-/*   Updated: 2023/01/31 17:03:19 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/02/19 18:09:11 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*check_str(char *str, t_arg *data)
 	i = -1;
 	while (str[++i])
 	{
-		if (!ft_strncmp(str + i, "N", 1) || !ft_strncmp(str + i, "S", 1) 
+		if (!ft_strncmp(str + i, "N", 1) || !ft_strncmp(str + i, "S", 1) \
 			|| !ft_strncmp(str + i, "W", 1) || !ft_strncmp(str + i, "E", 1))
 		{
 			data->count_start++;
@@ -42,26 +42,51 @@ char	**get_map(char *str, char **old_map, t_arg *data)
 		return (NULL);
 	data->size_map++;
 	new_map = (char **) malloc (sizeof(char *) * (data->size_map + 1));
-	i = -1;
+	i = 0;
 	str = check_str(str, data);
-	if (data->size_map != 1)
+	while (data->size_map != 1 && old_map[i])
 	{
-		while (old_map[++i])
-			new_map[i] = ft_strdup2(old_map[i]);
+		new_map[i] = ft_strdup2(old_map[i]);
+		i++;
 	}
 	if (data->dir_player && !data->y)
 		data->y = i;
 	new_map[i] = ft_strdup2(str);
 	new_map[++i] = '\0';
 	i = -1;
-	if (old_map)
-	{
-		while(old_map[++i])
-			free(old_map[i]);
-	}
+	while (old_map && old_map[++i])
+		free(old_map[i]);
 	free(old_map);
 	return (new_map);
 }
+
+/*char	**get_map(char *str, char **old_map, t_arg *data)
+{
+	int		i;
+	char	**new_map;
+
+	if (!str)
+		return (NULL);
+	data->size_map++;
+	new_map = (char **) malloc (sizeof(char *) * (data->size_map + 1));
+	i = 0;
+	str = check_str(str, data);
+	if (data->size_map != 1)
+	{
+		while (old_map[i++])
+			new_map[i - 1] = ft_strdup2(old_map[i - 1]);
+	}
+	if (data->dir_player && !data->y)
+		data->y = i;
+	printf("%i\n", i);
+	new_map[i] = ft_strdup2(str);
+	new_map[++i] = '\0';
+	i = -1;
+	while(old_map && old_map[++i])
+		free(old_map[i]);
+	free(old_map);
+	return (new_map);
+}*/
 
 int	ft_empty_sentence(char *str)
 {
@@ -84,6 +109,7 @@ int	get_data(t_arg *data, char *av)
 {
 	char	*line;
 
+	ft_bzero(data, sizeof(t_arg));
 	data->fd = open(av, O_RDONLY);
 	line = get_next_line(data->fd);
 	data->size_map = 0;

@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:57:43 by abouleau          #+#    #+#             */
-/*   Updated: 2023/01/31 15:34:09 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/02/19 18:31:18 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,4 @@ void	free_data(t_arg *data)
 	free(data->no);
 	free(data->f);
 	free(data->c);
-	//free_tab(data->map);
 }

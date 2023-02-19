@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 17:04:41 by fjallet           #+#    #+#             */
-/*   Updated: 2023/01/31 15:45:24 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/02/19 18:29:22 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_strlen2(char *str)
 	if (!str)
 		return (0);
 	i = 0;
-	while(str[i])
+	while (str[i])
 		i++;
 	return (i);
 }
@@ -45,7 +45,27 @@ int	create_int_tab(t_arg *data)
 		i++;
 	}
 	data->tab[i] = NULL;
-	return(0);
+	return (0);
+}
+
+char	*ft_strdup2(const char *s)
+{
+	size_t	len;
+	size_t	i;
+	char	*tab;
+
+	i = 0;
+	len = ft_strlen(s);
+	tab = (char *) malloc (sizeof(char) * (len + 1));
+	if (!tab)
+		return (0);
+	while (i < len)
+	{
+		tab[i] = s[i];
+		i++;
+	}
+	tab[i] = '\0';
+	return (tab);
 }
 
 /*char	*ft_put_rgb_to_hex(char *rgb, char *hex)

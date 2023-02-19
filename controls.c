@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 17:54:01 by abouleau          #+#    #+#             */
-/*   Updated: 2023/01/31 15:33:13 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/02/19 18:32:24 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,51 +41,39 @@ int	ft_close(t_fdf *f)
 
 int	key_press(int keycode, t_fdf *f)
 {
-	//printf("key_press == %d\n", keycode);
 	if (keycode == 65307)
 		ft_close(f);
-	else if (keycode == 119) // W ou Z
-	{
-		// printf("f->forward == %d\n", f->forward);
+	else if (keycode == 119)
 		f->forward = 1;
-		// printf("f->forward == %d\n", f->forward);
-	}
-	else if (keycode == 115) // S ou S
+	else if (keycode == 115)
 		f->back = 1;
-	else if (keycode == 97) // A ou Q
+	else if (keycode == 97)
 		f->left = 1;
-	else if (keycode == 100) // D ou D
+	else if (keycode == 100)
 		f->right = 1;
 	else if (keycode == 65363)
 		f->rotate_right = 1;
 	else if (keycode == 65361)
 		f->rotate_left = 1;
-	// else if (keycode == 101)
-	// 	zoom(f, 5);
-	// expose_hook(f);
 	return (0);
 }
 
 int	key_release(int keycode, t_fdf *f)
 {
-	// printf("key_release == %d\n", keycode);
 	if (keycode == 65307)
 		ft_close(f);
-	else if (keycode == 119) // W ou Z
+	else if (keycode == 119)
 		f->forward = 0;
-	else if (keycode == 115) // S ou S
+	else if (keycode == 115)
 		f->back = 0;
-	else if (keycode == 97) // A ou Q
+	else if (keycode == 97)
 		f->left = 0;
-	else if (keycode == 100) // D ou D
+	else if (keycode == 100)
 		f->right = 0;
 	else if (keycode == 65363)
 		f->rotate_right = 0;
 	else if (keycode == 65361)
 		f->rotate_left = 0;
-	// else if (keycode == 101)
-	// 	zoom(f, 5);
-	// expose_hook(f);
 	return (0);
 }
 
@@ -93,5 +81,5 @@ void	init_controls(t_fdf *fdf)
 {
 	mlx_hook(fdf->win_ptr, 2, 1L << 0, key_press, fdf);
 	mlx_hook(fdf->win_ptr, 17, 0, ft_close, fdf);
-	mlx_hook(fdf->win_ptr, 3, 1L << 1, key_release, fdf);// ?
+	mlx_hook(fdf->win_ptr, 3, 1L << 1, key_release, fdf);
 }

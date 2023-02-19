@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 15:49:51 by fjallet           #+#    #+#             */
-/*   Updated: 2023/01/31 16:10:41 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/02/19 18:57:09 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ void	ft_draw3d(t_fdf *f, long long **texture)
 
 	x = -1;
 	ft_draw_ceillings_floors(f);
-	while (++x < screenWidth)
+	while (++x < SCREENWIDTH)
 	{
 		ft_forward_back(f);
 		ft_left_right(f);
 		ft_rotate_right_left(f);
 		ray_screen(f, x);
-		f->mapX = (int)f->posX;
-		f->mapY = (int)f->posY;
+		f->mapx = (int)f->posx;
+		f->mapy = (int)f->posy;
 		ray_delta_step(f);
 		first_step_direction(f);
 		f->hit = 0;
@@ -40,7 +40,7 @@ void	ft_draw3d(t_fdf *f, long long **texture)
 /*void	draw_pixel4(t_fdf *fdf, int x1, int y1, int color)
 {
 	size_t	index;
-	if (y1 >= screenHeight || x1 >= screenWidth || x1 < 0 || y1 < 0)
+	if (y1 >= SCREENHEIGHT || x1 >= SCREENWIDTH || x1 < 0 || y1 < 0)
 		return ;
 	index = (y1 * fdf->text[0].size_l) + x1 * (fdf->text[0].bpp / 8);
 	fdf->text[0].data[index + 3] = (color & 0xFF000000) >> 24;

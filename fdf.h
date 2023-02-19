@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 11:45:36 by abouleau          #+#    #+#             */
-/*   Updated: 2023/01/31 16:28:02 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/02/19 19:01:56 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@
 # define P2 PI/2
 # define P3 3*PI/2
 # define DR 0.0174533
-#define screenWidth 640 //640//1920
-#define screenHeight 480 //480//1080
+# define SCREENWIDTH 640 //640//1920
+# define SCREENHEIGHT 480 //480//1080
 
 // #define mapWidth 24
 // #define mapHeight 24
-#define texWidth 1024
-#define texHeight 1024
+# define TEXWIDTH 1024
+# define TEXHEIGHT 1024
 
 //extern int worldMap[mapWidth][mapHeight];
 
@@ -56,8 +56,8 @@ typedef struct s_text
 	int		bpp;
 	int		endian;
 	int		size_l;
-	int 	height;
-	int 	witdh;
+	int		height;
+	int		witdh;
 }			t_text;
 
 typedef struct s_arg
@@ -86,29 +86,29 @@ typedef struct s_fdf
 	void		*mlx_ptr;
 	void		*win_ptr;
 	int			color;
-	double		posX;
-	double		posY;
-	double		dirX;
-	double		dirY;
-	double		planeX;
-	double		planeY;
-	double		cameraX;
-	double		rayDirX;
-	double		rayDirY;
-	double		sideDistX;
-	double		sideDistY;
-	double		deltaDistX;
-	double		deltaDistY;
-	int			mapX;
-	int			mapY;
-	double		perpWallDist;
-	int			stepX;
-	int			stepY;
+	double		posx;
+	double		posy;
+	double		dirx;
+	double		diry;
+	double		planex;
+	double		planey;
+	double		camerax;
+	double		raydirx;
+	double		raydiry;
+	double		sidedistx;
+	double		sidedisty;
+	double		deltadistx;
+	double		deltadisty;
+	int			mapx;
+	int			mapy;
+	double		perpwalldist;
+	int			stepx;
+	int			stepy;
 	int			hit;
 	int			side;
-	int			lineHeight;
-	int			drawStart;
-	int			drawEnd;
+	int			lineheight;
+	int			drawstart;
+	int			drawend;
 	double		movespeed;
 	double		rotspeed;
 	int			forward;
@@ -117,18 +117,17 @@ typedef struct s_fdf
 	int			right;
 	int			rotate_left;
 	int			rotate_right;
-	int			texX;
-	int			texNum;
-	int			texY;
-	int			mapWidth;
-	int			mapHeight;
+	int			texx;
+	int			texnum;
+	int			texy;
+	int			mapwidth;
+	int			mapheight;
 	long long	**texture;
 	t_text		text[5];
 	t_arg		data;
 	int			floor;
 	int			ceiling;
 }				t_fdf;
-
 
 //main.c
 void		ft_draw3d(t_fdf *f, long long **texture);
@@ -147,7 +146,7 @@ void		choose_text(t_fdf *f);
 void		ft_draw_walls(t_fdf *f, int x, long long **texture);
 
 // move_player.c
-void		ft_rotate_left(t_fdf *f, double olddirX);
+void		ft_rotate_left(t_fdf *f, double olddirx);
 void		ft_rotate_right_left(t_fdf *f);
 void		ft_left_right(t_fdf *f);
 void		ft_forward_back(t_fdf *f);
@@ -200,7 +199,6 @@ void		check_line(char *str, t_arg *data);
 // cub3D_utils
 int			ft_strlen2(char *str);
 int			create_int_tab(t_arg *data);
-
 
 // clean.c
 void		free_data(t_arg *data);

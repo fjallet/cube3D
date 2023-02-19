@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 14:50:51 by fjallet           #+#    #+#             */
-/*   Updated: 2023/01/31 16:05:02 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/02/19 18:30:23 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	check_argv(char *argv)
 int	check_file(char *str, char *suffix)
 {
 	int	i;
-	
+
 	if (!str)
 		return (1);
 	i = 0;
