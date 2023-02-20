@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 16:38:19 by fjallet           #+#    #+#             */
-/*   Updated: 2023/02/19 18:07:13 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/02/20 10:04:18 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	map_parsing2(t_arg *data, int i, int j)
 {
 	if (j < ft_strlen2(data->map[i]) && test_map(i, j, data))
 	{
-		printf("wrong map\n");
+		printf("open map\n");
 		free_coord(data->tab, data->size_map);
 		return (1);
 	}

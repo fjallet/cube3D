@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 15:49:51 by fjallet           #+#    #+#             */
-/*   Updated: 2023/02/19 18:57:09 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/02/20 10:00:54 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,16 +94,32 @@ int	expose_hook(t_fdf *f)
 
 //print_arg(&fdf.data);
 //printf("colors :\nf = %i et c = %i\n", fdf.floor, fdf.ceiling);
+int	check_prompt(char **av, int ac)
+{
+	if (ac == 1)
+	{
+		printf("too few argument\n");
+		return (1);
+	}
+	if (ac > 2)
+	{
+		printf("too many arguments\n");
+		return (1);
+	}
+	if (check_file(av[1], ".cub"))
+	{
+		printf("filename.cub\n");
+		return (1);
+	}
+	return (0);
+}
 
 int	main(int ac, char **av)
 {
 	t_fdf	fdf;
 
-	if (ac != 2 || check_file(av[1], ".cub"))
-	{
-		printf("wrong filename\n");
-		return (0);
-	}
+	if (check_prompt(av, ac))
+		return (1);
 	ft_bzero(&fdf, sizeof(fdf));
 	ft_bzero(&fdf.data, sizeof(t_arg));
 	if (cube3d_init(&fdf, av[1]))

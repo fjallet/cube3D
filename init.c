@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 17:49:51 by abouleau          #+#    #+#             */
-/*   Updated: 2023/02/19 18:56:14 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/02/20 09:21:52 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ int	cube3d_init(t_fdf *f, char *av)
 		return (1);
 	if (map_parsing(&f->data))
 		return (1);
-	f->movespeed = 0.00003;
-	f->rotspeed = 0.00003;
+	f->movespeed = 0.00006;
+	f->rotspeed = 0.00006;
 	f->posx = f->data.y;
 	f->posy = f->data.x;
 	f->mapwidth = f->data.longest_line;

@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 14:50:51 by fjallet           #+#    #+#             */
-/*   Updated: 2023/02/19 18:30:23 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/02/20 10:03:47 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,25 @@ int	check_data(t_arg *data)
 {
 	if (check_file(data->no, ".xpm") || check_file(data->so, ".xpm") || \
 	check_file(data->we, ".xpm") || check_file(data->ea, ".xpm"))
+	{
+		printf("texture file\n");
 		return (1);
+	}
 	if (check_rgb(data->f) || check_rgb(data->c))
+	{
+		printf("floor and ceiling : wrong syntax\n");
 		return (1);
-	if (data->count_start != 1)
+	}
+	if (data->count_start == 0)
+	{
+		printf("no starting point on the map\n");
 		return (1);
+	}
+	else if (data->count_start > 1)
+	{
+		printf("too much starting points on the map\n");
+		return (1);
+	}
 	return (0);
 }
 
@@ -46,9 +60,15 @@ int	check_file(char *str, char *suffix)
 	while (str[i])
 		i++;
 	if (ft_strncmp(str + i - 4, suffix, 4) != 0)
+	{
+		printf("wrong file name : ");
 		return (1);
+	}
 	if (check_argv(str))
+	{
+		printf("can't acces file : ");
 		return (1);
+	}
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 11:45:36 by abouleau          #+#    #+#             */
-/*   Updated: 2023/02/19 19:01:56 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/02/20 10:05:57 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # define BUFFER_SIZE 500
 # define HAUTEUR 512
 # define LARGEUR 1024
-# define P2 PI/2
-# define P3 3*PI/2
+# define P2 1.5707963267
+# define P3 4.7123889803
 # define DR 0.0174533
 # define SCREENWIDTH 640 //640//1920
 # define SCREENHEIGHT 480 //480//1080
@@ -132,6 +132,7 @@ typedef struct s_fdf
 //main.c
 void		ft_draw3d(t_fdf *f, long long **texture);
 int			expose_hook(t_fdf *f);
+int			check_prompt(char **av, int ac);
 
 //ray.c
 void		ray_screen(t_fdf *f, int x);
