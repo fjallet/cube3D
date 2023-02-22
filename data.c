@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 11:21:23 by fjallet           #+#    #+#             */
-/*   Updated: 2023/02/20 09:49:58 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/02/21 14:56:35 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,19 +138,19 @@ int	get_xpm_img(t_fdf *fdf)
 
 	largeur = 1920;
 	hauteur = 1080;
-	fdf->text[1].image = mlx_xpm_file_to_image(fdf->mlx_ptr, "./text1.xpm", \
+	fdf->text[1].image = mlx_xpm_file_to_image(fdf->mlx_ptr, fdf->data.no, \
 	&largeur, &hauteur);
 	fdf->text[1].data = mlx_get_data_addr(fdf->text[1].image, \
 	&fdf->text[1].bpp, &fdf->text[1].size_l, &fdf->text[1].endian);
-	fdf->text[2].image = mlx_xpm_file_to_image(fdf->mlx_ptr, "./text3.xpm", \
+	fdf->text[2].image = mlx_xpm_file_to_image(fdf->mlx_ptr, fdf->data.so, \
 	&largeur, &hauteur);
 	fdf->text[2].data = mlx_get_data_addr(fdf->text[2].image, \
 	&fdf->text[2].bpp, &fdf->text[2].size_l, &fdf->text[2].endian);
-	fdf->text[3].image = mlx_xpm_file_to_image(fdf->mlx_ptr, "./text2.xpm", \
+	fdf->text[3].image = mlx_xpm_file_to_image(fdf->mlx_ptr, fdf->data.we, \
 	&largeur, &hauteur);
 	fdf->text[3].data = mlx_get_data_addr(fdf->text[3].image, \
 	&fdf->text[3].bpp, &fdf->text[3].size_l, &fdf->text[3].endian);
-	fdf->text[4].image = mlx_xpm_file_to_image(fdf->mlx_ptr, "./text4.xpm", \
+	fdf->text[4].image = mlx_xpm_file_to_image(fdf->mlx_ptr, fdf->data.ea, \
 	&largeur, &hauteur);
 	fdf->text[4].data = mlx_get_data_addr(fdf->text[4].image, \
 	&fdf->text[4].bpp, &fdf->text[4].size_l, &fdf->text[4].endian);

@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 15:49:51 by fjallet           #+#    #+#             */
-/*   Updated: 2023/02/20 10:00:54 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/02/21 15:29:48 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ int	main(int ac, char **av)
 	mlx_hook(fdf.win_ptr, 2, 1L << 0, key_press, &fdf);
 	mlx_loop_hook(fdf.mlx_ptr, expose_hook, &fdf);
 	mlx_hook(fdf.win_ptr, 3, 1L << 1, key_release, &fdf);
+	mlx_hook(fdf.win_ptr, 17, 1L << 17, ft_close, &fdf);
 	mlx_loop(fdf.mlx_ptr);
 	(void)fdf;
 	return (0);

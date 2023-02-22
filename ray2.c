@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:26:58 by fjallet           #+#    #+#             */
-/*   Updated: 2023/02/19 19:01:56 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/02/21 14:42:07 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	ft_draw_walls(t_fdf *f, int x, long long **texture)
 
 	y = f->drawstart;
 	step = 1.0 * TEXHEIGHT / f->lineheight;
-	texpos = (f->drawstart - SCREENWIDTH / 2 + f->lineheight / 2) * step;
+	texpos = (f->drawstart - SCREENHEIGHT / 2 + f->lineheight / 2) * step;
 	while (y < f->drawend)
 	{
 		f->texy = (int)texpos & (TEXHEIGHT - 1);
