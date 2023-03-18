@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:57:43 by abouleau          #+#    #+#             */
-/*   Updated: 2023/02/19 18:31:18 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/03/18 17:24:29 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	free_tab(char **tab)
 	int	i;
 
 	i = 0;
+	if (!tab)
+		return ;
 	while (tab[i])
 	{
 		free(tab[i]);
@@ -52,10 +54,16 @@ void	free_coord(int **map, int count_y)
 
 void	free_data(t_arg *data)
 {
-	free(data->so);
-	free(data->we);
-	free(data->ea);
-	free(data->no);
-	free(data->f);
-	free(data->c);
+	if (data->so)
+		free(data->so);
+	if (data->we)
+		free(data->we);
+	if (data->ea)
+		free(data->ea);
+	if (data->no)
+		free(data->no);
+	if (data->f)
+		free(data->f);
+	if (data->c)
+		free(data->c);
 }

@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 11:45:36 by abouleau          #+#    #+#             */
-/*   Updated: 2023/02/20 10:05:57 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/03/18 19:10:14 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ typedef struct s_arg
 	int		longest_line;
 	int		x;
 	int		y;
+	int		error;
+	int		error_map;
 }			t_arg;
 
 typedef struct s_fdf
@@ -164,7 +166,6 @@ int			key_release(int keycode, t_fdf *f);
 void		init_controls(t_fdf *fdf);
 
 // init.c
-char		*ft_strdup2(const char *s);
 void		start_pos_init(t_fdf *f, char c);
 int			cube3d_init(t_fdf *f, char *av);
 int			get_texture(t_fdf *f);
@@ -195,11 +196,17 @@ int			check_data(t_arg *data);
 int			check_argv(char *argv);
 int			check_file(char *str, char *suffix);
 int			check_rgb(char *rgb);
-void		check_line(char *str, t_arg *data);
+int			check_line(char *str, t_arg *data);
 
 // cub3D_utils
 int			ft_strlen2(char *str);
 int			create_int_tab(t_arg *data);
+int			get_path(t_arg *data, char **text, char *str);
+int			get_shiet(t_arg *data, char **rgb, char *str);
+int			ft_ismap(char *str);
+
+//	cub3D_utils2
+char		*ft_strdup2(const char *s);
 
 // clean.c
 void		free_data(t_arg *data);

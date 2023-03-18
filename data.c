@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 11:21:23 by fjallet           #+#    #+#             */
-/*   Updated: 2023/02/21 14:56:35 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/03/18 19:25:36 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,8 @@ int	get_data(t_arg *data, char *av)
 	data->size_map = 0;
 	data->longest_line = 0;
 	data->count_start = 0;
+	data->error = 0;
+	data->error_map = 0;
 	while (line)
 	{
 		if (line)

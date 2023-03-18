@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 17:04:41 by fjallet           #+#    #+#             */
-/*   Updated: 2023/02/19 18:29:22 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/03/18 19:20:43 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	create_int_tab(t_arg *data)
 	return (0);
 }
 
-char	*ft_strdup2(const char *s)
+/*char	*ft_strdup2(const char *s)
 {
 	size_t	len;
 	size_t	i;
@@ -66,7 +66,7 @@ char	*ft_strdup2(const char *s)
 	}
 	tab[i] = '\0';
 	return (tab);
-}
+}*/
 
 /*char	*ft_put_rgb_to_hex(char *rgb, char *hex)
 {
@@ -90,3 +90,52 @@ char	*ft_strdup2(const char *s)
 	}
 	return (hex);
 }*/
+
+int	get_path(t_arg *data, char **text, char *str)
+{
+	int	i;
+
+	i = 0;
+	if (*text)
+	{
+		data->error = 1;
+		return (1);
+	}
+	while (str[i] == ' ')
+		i++;
+	*text = ft_strdup(&str[i]);
+	return (0);
+}
+
+int	get_shiet(t_arg *data, char **rgb, char *str)
+{
+	int	i;
+
+	i = 0;
+	if (*rgb)
+	{
+		data->error = 1;
+		return (1);
+	}
+	while (str[i] == ' ')
+		i++;
+	*rgb = ft_strdup(&str[i]);
+	return (0);
+}
+
+int	ft_ismap(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!ft_empty_sentence(str))
+		return (0) ;
+	while (str[i])
+	{
+		if (str[i] != ' ' && str[i] != '0' && str[i] != '1' &&\
+		str[i] != 'S' && str[i] != 'N' && str[i] != 'E' && str[i] != 'W')
+			return (1);
+		i++;
+	}
+	return (0);
+}
