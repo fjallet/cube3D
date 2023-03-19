@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 15:49:51 by fjallet           #+#    #+#             */
-/*   Updated: 2023/03/18 19:21:28 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/03/19 11:57:21 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	expose_hook(t_fdf *f)
 	return (0);
 }
 
-void	print_arg(t_arg *data)
+/*void	print_arg(t_arg *data)
 {
 	printf("no == %s\n", data->no);
 	printf("so == %s\n", data->so);
@@ -90,7 +90,7 @@ void	print_arg(t_arg *data)
 		printf("\n");
 		i++;
 	}
-}
+}*/
 
 //print_arg(&fdf.data);
 //printf("colors :\nf = %i et c = %i\n", fdf.floor, fdf.ceiling);

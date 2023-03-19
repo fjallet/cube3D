@@ -2,8 +2,8 @@ NO ./text4.xpm
 SO ./text2.xpm
 WE ./text1.xpm
 EA ./text3.xpm
-F 20,100,0
-C 225,30,0
+F 96,96,96
+C 119,181,254
 
 
         1111111111111111111111111

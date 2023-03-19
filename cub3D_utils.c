@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 17:04:41 by fjallet           #+#    #+#             */
-/*   Updated: 2023/03/18 19:20:43 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/03/19 11:58:07 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,10 +129,10 @@ int	ft_ismap(char *str)
 
 	i = 0;
 	if (!ft_empty_sentence(str))
-		return (0) ;
+		return (0);
 	while (str[i])
 	{
-		if (str[i] != ' ' && str[i] != '0' && str[i] != '1' &&\
+		if (str[i] != ' ' && str[i] != '0' && str[i] != '1' && \
 		str[i] != 'S' && str[i] != 'N' && str[i] != 'E' && str[i] != 'W')
 			return (1);
 		i++;

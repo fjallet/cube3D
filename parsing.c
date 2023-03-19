@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 16:38:19 by fjallet           #+#    #+#             */
-/*   Updated: 2023/02/20 10:04:18 by fjallet          ###   ########.fr       */
+/*   Updated: 2023/03/19 13:14:48 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	test_map(int i, int j, t_arg *data)
 {
 	if (data->map[i][j] == '0')
 	{
+		if (i == 0 || j == 0 || j == data->size_map)
+			return (1);
 		if (!data->map[i - 1][j] || !data->map[i + 1][j] || \
 		!data->map[i][j - 1] || !data->map[i][j + 1])
 			return (1);
@@ -40,6 +42,8 @@ int	map_parsing2(t_arg *data, int i, int j)
 	{
 		printf("open map\n");
 		free_coord(data->tab, data->size_map);
+		free_tab(data->map);
+		free_data(data);
 		return (1);
 	}
 	if (j >= ft_strlen2(data->map[i]) || data->map[i][j] == ' ' || \
